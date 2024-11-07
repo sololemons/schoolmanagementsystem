@@ -1,0 +1,28 @@
+{
+  "name": "schoolmanagementsystem",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^1.0.6",
+    "pinia": "^2.2.4",
+    "router": "^1.3.8",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5",
+    "vue-slick-carousel": "^1.0.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.12.0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "vite": "^5.4.8"
+  }
+}
