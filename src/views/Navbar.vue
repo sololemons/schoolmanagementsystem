@@ -40,8 +40,9 @@
                   </button>
                   <!-- Dropdown Content -->
                   <div class="absolute hidden group-hover:block bg-white shadow-lg mt-1 rounded-md w-48 z-20">
-                    <router-link to="/StudentPortal" class="block px-4 py-2 text-gray-700 hover:bg-indigo-600 hover:text-white">Student Portal</router-link>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-indigo-600 hover:text-white">Staff Portal</a>
+                    <router-link to="/StudentPortal" class="block px-4 py-2 text-gray-700 hover:bg-indigo-600 hover:text-white"> 👥Student Portal</router-link>
+                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-indigo-600 hover:text-white">👥Staff Portal</a>
+                    <router-link to="/AdminPortal" class="block px-4 py-2 text-gray-700 hover:bg-indigo-600 hover:text-white"> 👥Admin Portal</router-link>
               
                   </div>
                 </div>
@@ -85,19 +86,26 @@
               </div>
             </div>
     
-            <!-- Login/Sign up -->
-            <div class="hidden sm:flex sm:items-center space-x-4">
-                <router-link to="/Login" class="text-white bg-indigo-600 hover:bg-red-600 px-3 py-2 rounded-md text-sm font-medium">
-                    Login
-                  </router-link>
-                  
-           <router-link to="/Signup" class="text-white bg-indigo-600 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                 <!-- Authentication Buttons -->
+          <div class="hidden sm:flex sm:items-center ">
+            <!-- Show Login and Signup buttons if user is not authenticated -->
+            <div  class="space-x-4" v-if="!isAuthenticated">
+              <router-link to="/Login" class="text-white bg-indigo-600 hover:bg-red-600 px-3 py-2 rounded-md text-sm font-medium">
+                Login
+              </router-link>
+              <router-link to="/Signup" class="text-white bg-indigo-600 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
                 Sign Up
-           </router-link>
-          
+              </router-link>
+            </div>
+            <!-- Show Logout button if user is authenticated -->
+            <div v-else>
+              <button @click="logout" class="text-white bg-red-600 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                Logout
+              </button>
             </div>
           </div>
         </div>
+      </div>
       </nav>
     
       <!-- Content -->
@@ -110,7 +118,22 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { useAuthStore } from '@/stores/auth'; // Assume auth store is set up in Pinia or Vuex
+import { useRouter }  from 'vue-router'
 
+const authStore = useAuthStore();
+const router = useRouter();
+
+// Computed property to check authentication status
+const isAuthenticated = computed(() => authStore.isAuthenticated);
+
+// Method to log out
+function logout() {
+  authStore.logout(); 
+  router.push('/')
+  // Implement the logout action in your auth store
+}
 
 </script>
 
